@@ -52,7 +52,7 @@ export class BaseQuestionsService {
     answers: CheckAnswersDto[],
   ): Promise<CorrectAnswerDto> {
     const questions = await this.prismaService[
-      questionType + 'Answer'
+      questionType + 'Question'
     ].findMany({
       include: {
         answers: true,

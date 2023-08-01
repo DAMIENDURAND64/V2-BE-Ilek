@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EnvironmentQuestion {
+  id       Int                 @id
+  question String
+  answers  EnvironmentAnswer[]
+}
+
+model EnvironmentAnswer {
+  id         String              @id
+  answer     String
+  isCorrect  Boolean
+  question   EnvironmentQuestion @relation(fields: [questionId], references: [id])
+  questionId Int
+}
+
+model MitigationQuestion {
+  id       Int                @id
+  question String
+  answers  MitigationAnswer[]
+}
+
+model MitigationAnswer {
+  id         String             @id
+  answer     String
+  isCorrect  Boolean
+  question   MitigationQuestion @relation(fields: [questionId], references: [id])
+  questionId Int
+}
